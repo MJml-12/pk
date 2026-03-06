@@ -1,8 +1,4 @@
-"""
-Yosoku System v3 - Multi-page Dashboard entrypoint
-Run: python app.py
-"""
-
+import os
 import dash
 from dash import html, dcc
 import dash_bootstrap_components as dbc
@@ -13,15 +9,15 @@ app = dash.Dash(
     external_stylesheets=[dbc.themes.BOOTSTRAP],
     suppress_callback_exceptions=True,
 )
-app.title = "Penalty Zone Predictor"
+app.title = "Yosoku - Penalty Zone Predictor"
 
 navbar = dbc.NavbarSimple(
-    brand="⚽ Penalty Predictor",
-    brand_href="/",
+    brand="⚽ Yosoku",
+    brand_href="/global",
     color="dark",
     dark=True,
     children=[
-        dbc.NavItem(dbc.NavLink("Global-Model", href="/global")),
+        dbc.NavItem(dbc.NavLink("Global", href="/global")),
         dbc.NavItem(dbc.NavLink("Player-Based", href="/player")),
     ],
 )
@@ -36,5 +32,5 @@ app.layout = dbc.Container(
 )
 
 if __name__ == "__main__":
-    print("📍 http://localhost:8050")
-    app.run(debug=True, host="0.0.0.0", port=8050)
+    port = int(os.environ.get("PORT", "8050"))
+    app.run(debug=False, host="0.0.0.0", port=port)
